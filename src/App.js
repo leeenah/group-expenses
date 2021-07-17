@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Group from "./components/Group";
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Group Expense</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+            <Group />
+          </div>
+          <div class="col-2">col-2</div>
+          <div class="col-3">col-3</div>
+        </div>
+      </div>
     </div>
   );
 }
