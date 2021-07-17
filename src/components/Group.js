@@ -1,13 +1,13 @@
 import React from "react";
 
-const Group = () => {
+const Group = (props) => {
+  const group = props.groups.map((groupName, index) => (
+    <li key={index}>{groupName.name}</li>
+  ));
+
   return (
     <div className="group-panel">
-      <ul>
-        <li>Group 1</li>
-        <li>Group 2</li>
-        <li>Group 3</li>
-      </ul>
+      <ul>{group}</ul>
     </div>
   );
 };

@@ -3,16 +3,29 @@ import Group from "./components/Group";
 import "./App.css";
 
 function App() {
+  const groups = [
+    {
+      name: "2601 Cambie",
+      type: "home",
+    },
+    {
+      name: "Mexico Trip",
+      type: "vacation",
+    },
+    {
+      name: "Lena's Birthday",
+      type: "present",
+    },
+  ];
+
   return (
     <div className="App">
-      <h1>Group Expense</h1>
-      <div class="container">
-        <div class="row">
-          <div class="col-1">
-            <Group />
+      <h1>Group Expenses</h1>
+      <div className="container">
+        <div className="row">
+          <div className="col-1">
+            <Group groups={groups} />
           </div>
-          <div class="col-2">col-2</div>
-          <div class="col-3">col-3</div>
         </div>
       </div>
     </div>
