@@ -8,7 +8,7 @@ const Expenses = (props) => {
   ));
 
   return (
-    <div className="Expenses">
+    <div className="expenses-items">
       <h2>Total: $95.00</h2>
       <ul>2601 Cambie - {expenseList}</ul>
     </div>

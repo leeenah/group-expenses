@@ -43,15 +43,14 @@ function App() {
   return (
     <div className="App">
       <h1>Group Expenses</h1>
-      <div className="container">
-        <div className="row">
-          <div className="col-1">
-            <Group groups={groups} />
-          </div>
-          <div className="col-2">
-            <Expenses expenses={expenses} />
-          </div>
+      <div className="row">
+        <div className="col">
+          <Group groups={groups} />
         </div>
+        <div className="col">
+          <Expenses expenses={expenses} />
+        </div>
+        <div className="col">column three</div>
       </div>
     </div>
   );

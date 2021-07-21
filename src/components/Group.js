@@ -7,6 +7,7 @@ const Group = (props) => {
 
   return (
     <div className="group-panel">
+      <h3>List of groups:</h3>
       <ul>{group}</ul>
     </div>
   );
