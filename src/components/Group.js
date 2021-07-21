@@ -8,6 +8,8 @@ const Group = (props) => {
   return (
     <div className="group-panel">
       <h3>List of groups:</h3>
+      {/* onClick on the group name, 
+          it will open up the Expenses for the group and display extra information */}
       <ul>{group}</ul>
     </div>
   );

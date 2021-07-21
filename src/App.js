@@ -1,5 +1,6 @@
 import Group from "./components/Group";
 import Expenses from "./components/Expenses";
+import ItemDetail from "./components/ItemDetail";
 
 import "./App.css";
 
@@ -50,7 +51,9 @@ function App() {
         <div className="col">
           <Expenses expenses={expenses} />
         </div>
-        <div className="col">column three</div>
+        <div className="col">
+          <ItemDetail />
+        </div>
       </div>
     </div>
   );
