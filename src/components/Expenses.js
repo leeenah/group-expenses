@@ -1,21 +1,26 @@
 import React from "react";
 
-const Expenses = (props) => {
-  const expenseItem = props.expenses.map((item) => <li>{item.item}</li>);
+import "./Expenses.css";
 
-  const expensePrice = props.expenses.map((price) => <li>${price.amount}</li>);
+const Expenses = (props) => {
+  const expenseItem = props.expenses.map((item, index) => (
+    <li key={index}>{item.item}</li>
+  ));
+  const expensePrice = props.expenses.map((price, index) => (
+    <li key={index}>${price.amount}</li>
+  ));
 
   return (
-    <div className="expenses-items">
+    <div className="expenses-items" style={{ border: "solid" }}>
       <h2>Total: $95.00</h2>
       <div className="row">
-        <div className="col">
+        <div className="col-item">
           {/* onClick on the expenseItem, 
           it will open up the ItemDetail and display extra information */}
           <ul>Item {expenseItem}</ul>
         </div>
-        <div className="col">
-          <ul>Amount {expensePrice}</ul>
+        <div className="col-price">
+          <ul style={{ listStyleType: "none" }}>Amount {expensePrice}</ul>
         </div>
       </div>
     </div>

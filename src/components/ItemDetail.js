@@ -2,7 +2,7 @@ import React from "react";
 
 const ItemDetail = () => {
   return (
-    <div className="item-detail">
+    <div className="item-detail" style={{ border: "solid" }}>
       <p>
         <strong>Groceries</strong>
       </p>
