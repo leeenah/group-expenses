@@ -1,25 +1,22 @@
 import React from "react";
 
-const Group = ({ groups }) => {
-  const group = groups.map((groupName, index) => (
-    <a href="/" onClick={openExpenseList}>
-      <li key={index}>{groupName.name}</li>
-    </a>
-  ));
-
-  var openExpenseList = (event) => {
-    event.preventDefault();
-    console.log("clicked");
+const Group = ({ groups, expenses, action }) => {
+  const handleClick = (index) => {
+    let selectedGroup = groups[index];
+    action(selectedGroup);
   };
+
+  const group = groups.map((groupName, index) => (
+    <li key={index}>
+      <button onClick={handleClick.bind(this, index)}>{groupName.name}</button>
+    </li>
+  ));
 
   return (
     <div className="group-panel">
       <h3>List of groups:</h3>
-      {/* onClick on the group name, 
-          it will open up the Expenses for the group and display list of expenses */}
-      <a href="/">
-        <ul>{group}</ul>
-      </a>
+
+      <ul>{group}</ul>
     </div>
   );
 };

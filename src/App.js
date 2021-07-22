@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Group from "./components/Group";
 import Expenses from "./components/Expenses";
 import ItemDetail from "./components/ItemDetail";
@@ -5,7 +6,7 @@ import ItemDetail from "./components/ItemDetail";
 import "./App.css";
 
 function App() {
-  const groups = [
+  const [groups, setGroups] = useState([
     {
       name: "2601 Cambie",
       type: "home",
@@ -16,11 +17,11 @@ function App() {
     },
     {
       name: "Lena's Birthday",
-      type: "present",
+      type: "other",
     },
-  ];
+  ]);
 
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
       name: "2601 Cambie",
       type: "home",
@@ -39,14 +40,23 @@ function App() {
       description: "monthly internet bill",
       amount: 90.0,
     },
-  ];
+  ]);
+
+  const openGroupExpense = (group) => {
+    console.log(group);
+  };
 
   return (
     <div className="App">
+      {/**TODO - Add Header Component */}
       <h1>Group Expenses</h1>
       <div className="row">
         <div className="col">
-          <Group groups={groups} />
+          <Group
+            groups={groups}
+            expenses={expenses}
+            action={openGroupExpense}
+          />
         </div>
         <div className="col">
           <Expenses expenses={expenses} />
