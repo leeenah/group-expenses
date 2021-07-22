@@ -1,6 +1,6 @@
 import React from "react";
 
-const Group = ({ groups, expenses, action }) => {
+const Group = ({ groups, action }) => {
   const handleClick = (index) => {
     let selectedGroup = groups[index];
     action(selectedGroup);

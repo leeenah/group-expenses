@@ -10,6 +10,22 @@ function App() {
     {
       name: "2601 Cambie",
       type: "home",
+      expenses: [
+        {
+          date: "July 17, 2021",
+          vendor: "Urban Fare",
+          item: "Groceries",
+          description: "groceries for the week",
+          amount: 5.0,
+        },
+        {
+          date: "July 30, 2021",
+          vendor: "Urban Fibre",
+          item: "internet",
+          description: "monthly internet bill",
+          amount: 90.0,
+        },
+      ],
     },
     {
       name: "Mexico Trip",
@@ -21,29 +37,10 @@ function App() {
     },
   ]);
 
-  const [expenses, setExpenses] = useState([
-    {
-      name: "2601 Cambie",
-      type: "home",
-      date: "July 17, 2021",
-      vendor: "Urban Fare",
-      item: "Groceries",
-      description: "groceries for the week",
-      amount: 5.0,
-    },
-    {
-      name: "2601 Cambie",
-      type: "home",
-      date: "July 30, 2021",
-      vendor: "Urban Fibre",
-      item: "internet",
-      description: "monthly internet bill",
-      amount: 90.0,
-    },
-  ]);
+  const [selectedGroup, setSelectedGroup] = useState(null);
 
   const openGroupExpense = (group) => {
-    console.log(group);
+    setSelectedGroup(group);
   };
 
   return (
@@ -52,14 +49,10 @@ function App() {
       <h1>Group Expenses</h1>
       <div className="row">
         <div className="col">
-          <Group
-            groups={groups}
-            expenses={expenses}
-            action={openGroupExpense}
-          />
+          <Group groups={groups} action={openGroupExpense} />
         </div>
         <div className="col">
-          <Expenses expenses={expenses} />
+          <Expenses group={selectedGroup} />
         </div>
         <div className="col">
           <ItemDetail />
