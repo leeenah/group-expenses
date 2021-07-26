@@ -1,6 +1,10 @@
 .row {
   display: flex;
 }
+.col-date {
+  flex: 50%;
+  padding: 10px;
+}
 
 .col-item {
   flex: 50%;

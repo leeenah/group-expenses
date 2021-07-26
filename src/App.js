@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Group from "./components/Group";
 import Expenses from "./components/Expenses";
-import ItemDetail from "./components/ItemDetail";
+import ExpenseInformation from "./components/ExpenseInformation";
 
 import "./App.css";
 
@@ -13,15 +13,19 @@ function App() {
       expenses: [
         {
           date: "July 17, 2021",
+          paid_by: "Pavel",
           vendor: "Urban Fare",
-          item: "Groceries",
+          item: "Urban Fare",
+          category: "Groceries",
           description: "groceries for the week",
           amount: 5.0,
         },
         {
           date: "July 30, 2021",
+          paid_by: "Pavel",
           vendor: "Urban Fibre",
-          item: "internet",
+          item: "Internet",
+          category: "Utilites",
           description: "monthly internet bill",
           amount: 90.0,
         },
@@ -30,19 +34,34 @@ function App() {
     {
       name: "Mexico Trip",
       type: "vacation",
-      expenses: [],
+      expenses: [
+        {
+          date: "July 25, 2021",
+          paid_by: "Lena",
+          vendor: "Air Canada",
+          item: "Air Canada",
+          category: "Travel",
+          description: "Flight tickets",
+          amount: 2000.0,
+        },
+      ],
     },
     {
-      name: "Lena's Birthday",
+      name: "Mum's Birthday",
       type: "other",
       expenses: [],
     },
   ]);
 
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [selectedExpense, setSelectedExpense] = useState(null);
 
   function openGroupExpense(group) {
     setSelectedGroup(group);
+  }
+
+  function openExpenseInformation(expenseInformation) {
+    setSelectedExpense(expenseInformation);
   }
 
   return (
@@ -54,10 +73,10 @@ function App() {
           <Group groups={groups} action={openGroupExpense} />
         </div>
         <div className="col">
-          <Expenses group={selectedGroup} />
+          <Expenses group={selectedGroup} action={openExpenseInformation} />
         </div>
         <div className="col">
-          <ItemDetail />
+          <ExpenseInformation expense={selectedExpense} />
         </div>
       </div>
     </div>
