@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+}
+
+.col-item {
+  flex: 50%;
+  padding: 10px;
+}
+
+.col-price {
+  flex: 50%;
+  padding: 10px;
+  text-align: right;
+}

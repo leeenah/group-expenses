@@ -30,18 +30,20 @@ function App() {
     {
       name: "Mexico Trip",
       type: "vacation",
+      expenses: [],
     },
     {
       name: "Lena's Birthday",
       type: "other",
+      expenses: [],
     },
   ]);
 
   const [selectedGroup, setSelectedGroup] = useState(null);
 
-  const openGroupExpense = (group) => {
+  function openGroupExpense(group) {
     setSelectedGroup(group);
-  };
+  }
 
   return (
     <div className="App">
