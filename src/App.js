@@ -58,6 +58,7 @@ function App() {
 
   function openGroupExpense(group) {
     setSelectedGroup(group);
+    setSelectedExpense(null);
   }
 
   function openExpenseInformation(expenseInformation) {

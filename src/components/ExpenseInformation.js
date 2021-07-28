@@ -4,7 +4,7 @@ const ExpenseInformation = ({ expense }) => {
   return (
     <div className="expense-information" style={{ border: "solid" }}>
       <div>
-        <strong>More about this expense:</strong>
+        {expense != null && <strong>More about this expense:</strong>}
         {expense != null && <p>Item: {expense.item}</p>}
       </div>
 
