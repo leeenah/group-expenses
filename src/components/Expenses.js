@@ -19,6 +19,8 @@ const Expenses = ({ group, action }) => {
           </button>
         </div>
         <div className="col-price">${expense.amount}</div>
+        <button>delete</button>
+        <button>edit</button>
       </div>
     ));
   }
