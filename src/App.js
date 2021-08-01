@@ -65,13 +65,24 @@ function App() {
     setSelectedExpense(expenseInformation);
   }
 
+  function addNewGroup(newExpenseGroup) {
+    // https://stackoverflow.com/a/67354136
+    var tempGroups = groups.slice();
+    tempGroups.push({ name: newExpenseGroup, expenses: [] });
+    setGroups(tempGroups);
+  }
+
   return (
     <div className="App">
       {/**TODO - Add Header Component */}
       <h1>Group Expenses</h1>
       <div className="row">
         <div className="col">
-          <Group groups={groups} action={openGroupExpense} />
+          <Group
+            groups={groups}
+            action={openGroupExpense}
+            newExpenseGroup={addNewGroup}
+          />
         </div>
         <div className="col">
           <Expenses group={selectedGroup} action={openExpenseInformation} />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Group = ({ groups, action }) => {
+const Group = ({ groups, action, newExpenseGroup }) => {
   const [newGroup, setNewGroup] = useState("");
 
   const handleClick = (index) => {
@@ -10,15 +10,10 @@ const Group = ({ groups, action }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    addNewGroup(newGroup);
-    console.log(`Group Name: ${newGroup}`);
+    newExpenseGroup(newGroup);
   }
 
-  function addNewGroup() {
-    console.log(`"${newGroup}" added to list`);
-  }
-
-  function AddNewGroupName(input) {
+  function addNewGroupName(input) {
     setNewGroup(input.target.value);
   }
 
@@ -39,7 +34,7 @@ const Group = ({ groups, action }) => {
           type="text"
           placeholder="Add New Group"
           value={newGroup}
-          onChange={AddNewGroupName}
+          onChange={addNewGroupName}
         />
       </form>
 
