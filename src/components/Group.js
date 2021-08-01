@@ -11,6 +11,7 @@ const Group = ({ groups, action, newExpenseGroup }) => {
   function handleSubmit(event) {
     event.preventDefault();
     newExpenseGroup(newGroup);
+    setNewGroup("");
   }
 
   function addNewGroupName(input) {
