@@ -6,6 +6,7 @@ import ExpenseInformation from "./components/ExpenseInformation";
 import "./App.css";
 
 function App() {
+  // update Mexico trip (with cccc)
   const [groups, setGroups] = useState([
     {
       name: "2601 Cambie",
@@ -57,19 +58,44 @@ function App() {
   const [selectedExpense, setSelectedExpense] = useState(null);
 
   function openGroupExpense(group) {
-    setSelectedGroup(group);
+    const clone = {
+      name: group.name,
+      type: group.type,
+      expenses: group.expenses.slice(),
+    };
+    setSelectedGroup(clone);
     setSelectedExpense(null);
   }
 
-  function openExpenseInformation(expenseInformation) {
-    setSelectedExpense(expenseInformation);
-  }
+  // function openExpenseInformation(expenseInformation) {
+  //   setSelectedExpense(expenseInformation);
+  // }
 
   function addNewGroup(newExpenseGroup) {
     // https://stackoverflow.com/a/67354136
     var tempGroups = groups.slice();
     tempGroups.push({ name: newExpenseGroup, expenses: [] });
     setGroups(tempGroups);
+  }
+
+  function updateGroup(group) {
+    // Option 1 (use map)
+    // Pros: simple
+    // Cons: iterates over all of the items (so if there is million items
+    // this map will iterate over million items - even if we're simply
+    // trying to modify the first one or second one)
+    // This is a performance hell
+    const updatedGroups = groups.map((currentGroup) => {
+      // Ideally we would compare id (unique identifier) and do a check
+      // Because some groups could have the same name and that
+      // would have side effects
+      if (currentGroup.name === group.name) {
+        return group;
+      } else {
+        return currentGroup;
+      }
+    });
+    setGroups(updatedGroups);
   }
 
   return (
@@ -85,7 +111,7 @@ function App() {
           />
         </div>
         <div className="col">
-          <Expenses group={selectedGroup} action={openExpenseInformation} />
+          <Expenses group={selectedGroup} action={updateGroup} />
         </div>
         <div className="col">
           <ExpenseInformation expense={selectedExpense} />
