@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Group from "./components/Group";
 import Expenses from "./components/Expenses";
-import ExpenseInformation from "./components/ExpenseInformation";
+// import ExpenseInformation from "./components/ExpenseInformation";
 
 import "./App.css";
 
@@ -53,16 +53,17 @@ function App() {
   ]);
 
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [selectedExpense, setSelectedExpense] = useState(null);
+  // const [selectedExpense, setSelectedExpense] = useState(null);
 
   function openGroupExpense(group) {
     const clone = {
+      id: group.id,
       name: group.name,
       type: group.type,
       expenses: group.expenses.slice(),
     };
     setSelectedGroup(clone);
-    setSelectedExpense(null);
+    // setSelectedExpense(null);
   }
 
   // function openExpenseInformation(expenseInformation) {
@@ -76,7 +77,7 @@ function App() {
     setGroups(tempGroups);
   }
 
-  function updateGroup(group) {
+  function updateGroup(updatedGroup) {
     // Option 1 (use map)
     // Pros: simple
     // Cons: iterates over all of the items (so if there is million items
@@ -87,8 +88,8 @@ function App() {
       // Ideally we would compare id (unique identifier) and do a check
       // Because some groups could have the same name and that
       // would have side effects
-      if (currentGroup.name === group.name) {
-        return group;
+      if (currentGroup.id === updatedGroup.id) {
+        return updatedGroup;
       } else {
         return currentGroup;
       }
@@ -101,19 +102,24 @@ function App() {
       {/**TODO - Add Header Component */}
       <h1>Group Expenses</h1>
       <div className="row">
-        <div className="col">
+        <div className="col-1">
           <Group
             groups={groups}
             action={openGroupExpense}
             newExpenseGroup={addNewGroup}
           />
         </div>
-        <div className="col">
-          <Expenses group={selectedGroup} action={updateGroup} />
-        </div>
-        <div className="col">
+        {/** Conditional render so that when selectedGroup is true,
+         * it will display the component */}
+        {selectedGroup && (
+          <div className="col-2">
+            <Expenses group={selectedGroup} action={updateGroup} />
+          </div>
+        )}
+
+        {/* <div className="col">
           <ExpenseInformation expense={selectedExpense} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

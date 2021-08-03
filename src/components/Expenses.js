@@ -10,6 +10,7 @@ const Expenses = ({ group, action }) => {
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [editedGroupName, setEditedGroupName] = useState("");
 
   const handleClick = (index) => {
     let selectedExpenseItem = group.expenses[index];
@@ -39,10 +40,31 @@ const Expenses = ({ group, action }) => {
     setExpense({ ...expense, [event.target.name]: value });
   }
 
+  function typedGroupName(input) {
+    setEditedGroupName(input.target.value);
+  }
+
   function toggleEditMode() {
     var currentIsEditing = isEditing;
     var newIsEditing = !currentIsEditing;
     setIsEditing(newIsEditing);
+
+    updateGroupName();
+  }
+
+  function saveGroupName(event) {
+    event.preventDefault();
+
+    updateGroupName();
+  }
+
+  function updateGroupName() {
+    if (isEditing) {
+      group.name = editedGroupName;
+      action(group);
+
+      setIsEditing(false);
+    }
   }
 
   var expenseItems = [];
@@ -69,12 +91,13 @@ const Expenses = ({ group, action }) => {
           <h1>{group.name}</h1>
 
           {isEditing && (
-            <form>
-              <input type="text" />
+            <form onSubmit={saveGroupName}>
+              <input type="text" onChange={typedGroupName} />
             </form>
           )}
 
           <button onClick={toggleEditMode}>
+            {/** Below is a ternary condition. If isEditing state is true, "save" will be displayed, and if it's false "edit" will be displayed*/}
             {isEditing ? "save" : "edit"}
           </button>
           {expenseItems.length > 0 && <div>{expenseItems} </div>}
