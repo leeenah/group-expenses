@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import "./Expenses.css";
 
 const Expenses = ({ group, action }) => {
-  const [date, setDate] = useState("");
+  const [expense, setExpense] = useState({
+    date: "",
+    description: "",
+    amount: "",
+  });
 
   const handleClick = (index) => {
     let selectedExpenseItem = group.expenses[index];
@@ -12,12 +16,25 @@ const Expenses = ({ group, action }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    group.expenses.push({ date: date });
+    console.log(group);
+    group.expenses.push({
+      date: expense.date,
+      description: expense.description,
+      amount: expense.amount,
+    });
     action(group);
+    setExpense({
+      date: "",
+      description: "",
+      amount: "",
+    });
   }
 
-  function onChange(input) {
-    setDate(input.target.value);
+  // multiple inputs
+  // ref: https://www.pluralsight.com/guides/handling-multiple-inputs-with-single-onchange-handler-react
+  function onChange(event) {
+    const value = event.target.value;
+    setExpense({ ...expense, [event.target.name]: value });
   }
 
   var expenseItems = [];
@@ -27,7 +44,7 @@ const Expenses = ({ group, action }) => {
         <div className="col-date">{expense.date}</div>
         <div className="col-item">
           <button onClick={handleClick.bind(this, index)}>
-            {expense.item}
+            {expense.description}
           </button>
         </div>
         <div className="col-price">${expense.amount}</div>
@@ -46,27 +63,30 @@ const Expenses = ({ group, action }) => {
         <div className="col-date">
           <input
             type="text"
-            value={date}
+            name="date"
+            value={expense.date}
             placeholder="Date"
             onChange={onChange}
           />
         </div>
-        {/* <div className="col-item">
-            <input
-              type="text"
-              value={description}
-              placeholder="Description"
-              onChange={onChange}
-            />
-          </div>
-          <div className="col-price">
-            <input
-              type="text"
-              value={amount}
-              placeholder="$0.00"
-              onChange={onChange}
-            />
-          </div> */}
+        <div className="col-description">
+          <input
+            type="text"
+            name="description"
+            value={expense.description}
+            placeholder="Description"
+            onChange={onChange}
+          />
+        </div>
+        <div className="col-price">
+          <input
+            type="text"
+            name="amount"
+            value={expense.amount}
+            placeholder="$0.00"
+            onChange={onChange}
+          />
+        </div>
         <button type="submit">+</button>
       </form>
     </div>
