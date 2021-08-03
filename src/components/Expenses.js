@@ -9,6 +9,8 @@ const Expenses = ({ group, action }) => {
     amount: "",
   });
 
+  const [isEditing, setIsEditing] = useState(false);
+
   const handleClick = (index) => {
     let selectedExpenseItem = group.expenses[index];
     action(selectedExpenseItem);
@@ -16,7 +18,7 @@ const Expenses = ({ group, action }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(group);
+
     group.expenses.push({
       date: expense.date,
       description: expense.description,
@@ -35,6 +37,12 @@ const Expenses = ({ group, action }) => {
   function onChange(event) {
     const value = event.target.value;
     setExpense({ ...expense, [event.target.name]: value });
+  }
+
+  function toggleEditMode() {
+    var currentIsEditing = isEditing;
+    var newIsEditing = !currentIsEditing;
+    setIsEditing(newIsEditing);
   }
 
   var expenseItems = [];
@@ -56,39 +64,52 @@ const Expenses = ({ group, action }) => {
 
   return (
     <div className="expenses-items" style={{ border: "solid" }}>
-      {group != null && <h1>{group.name}</h1>}
-      {expenseItems.length > 0 && <div>{expenseItems} </div>}
+      {group != null && (
+        <div>
+          <h1>{group.name}</h1>
 
-      <form className="row" onSubmit={handleSubmit}>
-        <div className="col-date">
-          <input
-            type="text"
-            name="date"
-            value={expense.date}
-            placeholder="Date"
-            onChange={onChange}
-          />
+          {isEditing && (
+            <form>
+              <input type="text" />
+            </form>
+          )}
+
+          <button onClick={toggleEditMode}>
+            {isEditing ? "save" : "edit"}
+          </button>
+          {expenseItems.length > 0 && <div>{expenseItems} </div>}
+          <form className="row" onSubmit={handleSubmit}>
+            <div className="col-date">
+              <input
+                type="text"
+                name="date"
+                value={expense.date}
+                placeholder="Date"
+                onChange={onChange}
+              />
+            </div>
+            <div className="col-description">
+              <input
+                type="text"
+                name="description"
+                value={expense.description}
+                placeholder="Description"
+                onChange={onChange}
+              />
+            </div>
+            <div className="col-price">
+              <input
+                type="text"
+                name="amount"
+                value={expense.amount}
+                placeholder="$0.00"
+                onChange={onChange}
+              />
+            </div>
+            <button type="submit">+</button>
+          </form>
         </div>
-        <div className="col-description">
-          <input
-            type="text"
-            name="description"
-            value={expense.description}
-            placeholder="Description"
-            onChange={onChange}
-          />
-        </div>
-        <div className="col-price">
-          <input
-            type="text"
-            name="amount"
-            value={expense.amount}
-            placeholder="$0.00"
-            onChange={onChange}
-          />
-        </div>
-        <button type="submit">+</button>
-      </form>
+      )}
     </div>
   );
 };

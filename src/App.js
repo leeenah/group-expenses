@@ -9,6 +9,7 @@ function App() {
   // update Mexico trip (with cccc)
   const [groups, setGroups] = useState([
     {
+      id: 1000,
       name: "2601 Cambie",
       type: "home",
       expenses: [
@@ -33,6 +34,7 @@ function App() {
       ],
     },
     {
+      id: 1001,
       name: "Mexico Trip",
       type: "vacation",
       expenses: [
@@ -47,11 +49,7 @@ function App() {
         },
       ],
     },
-    {
-      name: "Mum's Birthday",
-      type: "other",
-      expenses: [],
-    },
+    { id: 1002, name: "Mum's Birthday", type: "other", expenses: [] },
   ]);
 
   const [selectedGroup, setSelectedGroup] = useState(null);
